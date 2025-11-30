@@ -1,5 +1,5 @@
 How to use in project:
-1. git submodule add git@github.com:RevyaS/Rev-Godot-Core-Plugin.git
+1. git submodule add git@github.com:RevyaS/Rev-Godot-Core-Plugin.git addons/rev_godot_core
 2. Add the dependency RevGodotCore.dll, eg;
     ```
     <ItemGroup>
