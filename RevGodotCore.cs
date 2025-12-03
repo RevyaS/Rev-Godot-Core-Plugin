@@ -5,7 +5,7 @@ using System;
 [Tool]
 public partial class RevGodotCore : EditorPlugin
 {
-	Button pivotButton;
+	Button pivotButton = null!;
 
 	public override void _EnterTree()
 	{
