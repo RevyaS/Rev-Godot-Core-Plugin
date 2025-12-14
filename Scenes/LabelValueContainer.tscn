@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd1411oyw560d"]
+
+[ext_resource type="Script" uid="uid://qkkj7h0emvcp" path="res://addons/rev_godot_core/Scenes/LabelValueContainer.cs" id="1_jqtjl"]
+
+[node name="LabelValueContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+script = ExtResource("1_jqtjl")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Test: "
+
+[node name="LabelValue" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value1"
+horizontal_alignment = 2
