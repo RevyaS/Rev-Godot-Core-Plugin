@@ -1,2 +1,5 @@
 v.00001
 - Transferred files from RevGodotPlugin
+- Added LabelValueContainer from DebugLabelValueContainer
+- Added RevGodotCoreSceneFactory for Scene loading
+- Added HFlowNodeContainer
