@@ -3,3 +3,4 @@ v.00001
 - Added LabelValueContainer from DebugLabelValueContainer
 - Added RevGodotCoreSceneFactory for Scene loading
 - Added HFlowNodeContainer
+- Added BloomScreen Vfx

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj1goh18p2j47"]
+
+[ext_resource type="Shader" uid="uid://v4yh883amhd2" path="res://addons/rev_godot_core/Vfx/BloomScreen.gdshader" id="1_2mdv2"]
+[ext_resource type="Script" uid="uid://06evjs7hppwn" path="res://addons/rev_godot_core/Vfx/BloomScreen.cs" id="2_ho1w2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ho1w2"]
+resource_local_to_scene = true
+shader = ExtResource("1_2mdv2")
+shader_parameter/edge_strength = 1.0
+shader_parameter/inner_strength = 0.101
+shader_parameter/radius = 0.72800004
+shader_parameter/feather = 0.47000003
+
+[node name="BloomScreen" type="ColorRect"]
+material = SubResource("ShaderMaterial_ho1w2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.53, 0.5378332, 1)
+script = ExtResource("2_ho1w2")
+BloomStrength = 1.0
+InnertBloomStrength = 0.101
+Radius = 0.72800004
+Feather = 0.47000003
