@@ -11,6 +11,13 @@ public partial class RevGodotCoreSceneFactory
         return scene;
     }
 
+    public static Table CreateTable(params string[] headers)
+    {
+        var scene = GetScene<Table>("res://addons/rev_godot_core/Scenes/Table.tscn");
+        scene.Headers = headers;
+        return scene;
+    }
+
     public static SlotSelectorDialog CreateSlotSelectorDialog(IReadOnlyList<SaveSlot> slots, SlotSelectorMode mode, Func<SaveSlot, string>? describe = null)
     {
         var scene = GetScene<SlotSelectorDialog>("res://addons/rev_godot_core/Scenes/SlotSelectorDialog.tscn");
