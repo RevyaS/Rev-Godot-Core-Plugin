@@ -5,7 +5,18 @@ using System;
 [Tool]
 public partial class RevGodotCore : EditorPlugin
 {
+	const string DataManagerAutoload = "RevDataManager";
 	Button pivotButton = null!;
+
+	public override void _EnablePlugin()
+	{
+		AddAutoloadSingleton(DataManagerAutoload, "res://addons/rev_godot_core/Autoloads/RevDataManager.cs");
+	}
+
+	public override void _DisablePlugin()
+	{
+		RemoveAutoloadSingleton(DataManagerAutoload);
+	}
 
 	public override void _EnterTree()
 	{

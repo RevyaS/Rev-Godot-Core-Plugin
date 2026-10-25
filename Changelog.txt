@@ -1,3 +1,7 @@
+v.00002
+- Added RevDataManager autoload for saving/loading MessagePack data, paths default to res://
+- Added SlotSelectorDialog for picking save slots
+
 v.00001
 - Transferred files from RevGodotPlugin
 - Added LabelValueContainer from DebugLabelValueContainer
