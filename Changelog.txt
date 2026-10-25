@@ -1,3 +1,6 @@
+v.00004
+- Added DragScrollContainer for scrolling by dragging, like mobile lists
+
 v.00003
 - Added Table for grids with aligned columns and an optional header row
 

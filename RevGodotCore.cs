@@ -36,6 +36,9 @@ public partial class RevGodotCore : EditorPlugin
 		var hflowNodeContainerIcon = GD.Load<Texture2D>("res://addons/rev_godot_core/Assets/Icons/HFlowContainer.svg");
 		AddCustomType(nameof(HFlowNodeContainer), nameof(HFlowContainer), hflowNodeContainerScript, hflowNodeContainerIcon);
 
+		var dragScrollContainerScript = GD.Load<Script>("res://addons/rev_godot_core/Components/DragScrollContainer.cs");
+		AddCustomType(nameof(DragScrollContainer), nameof(ScrollContainer), dragScrollContainerScript, containerIcon);
+
 		pivotButton = new Button
         {
             Text = "Center Pivot",
