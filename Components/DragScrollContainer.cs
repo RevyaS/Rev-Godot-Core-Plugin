@@ -19,6 +19,20 @@ public partial class DragScrollContainer : ScrollContainer
     /// <summary>True from the moment the current press turned into a drag until the next press.</summary>
     public bool LastGestureWasDrag { get; private set; }
 
+    /// <summary>
+    /// Stops following the current press, e.g. when a child starts dragging an item out of the list.
+    /// The press still counts as a drag, so buttons ignore its release.
+    /// </summary>
+    public void Release()
+    {
+        if (tracking)
+        {
+            LastGestureWasDrag = true;
+        }
+        tracking = false;
+        dragging = false;
+    }
+
     public override void _Input(InputEvent e)
     {
         if (Engine.IsEditorHint() || !IsVisibleInTree()) return;

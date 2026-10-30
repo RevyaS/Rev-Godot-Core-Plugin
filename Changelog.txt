@@ -1,5 +1,7 @@
 v.00004
 - Added DragScrollContainer for scrolling by dragging, like mobile lists
+- Added GestureDetector: turns presses on its parent control into tap, long press, swipe and drag, without covering anything
+- Added DragScrollContainer.Release for letting a child drag an item out of the list
 
 v.00003
 - Added Table for grids with aligned columns and an optional header row
