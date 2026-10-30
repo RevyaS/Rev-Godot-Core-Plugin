@@ -44,6 +44,13 @@ public partial class GestureDetector : Node
     [Export]
     public bool Drags { get; set; }
 
+    /// <summary>
+    /// Whether moves that aren't swipes or drags scroll the nearest ScrollContainer. Off for things dragged
+    /// out of a list in any direction (they drag even along the list's scroll axis).
+    /// </summary>
+    [Export]
+    public bool ScrollsParent { get; set; } = true;
+
     Control? target;
     ScrollContainer? scroll;
     State state = State.Idle;
@@ -253,6 +260,7 @@ public partial class GestureDetector : Node
 
     private ScrollContainer? FindScroll()
     {
+        if (!ScrollsParent) return null;
         for (Node? node = target?.GetParent(); node is not null; node = node.GetParent())
         {
             if (node is ScrollContainer found) return found;
