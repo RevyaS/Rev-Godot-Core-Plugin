@@ -37,6 +37,10 @@ public partial class GestureDetector : Node
     [Export]
     public bool HorizontalSwipes { get; set; }
 
+    /// <summary>Whether up and down flicks are swipes (with <see cref="Swipes"/>); off for only sideways swipes, leaving up and down moves to drags.</summary>
+    [Export]
+    public bool VerticalSwipes { get; set; } = true;
+
     /// <summary>
     /// Whether moves are reported as drags (<see cref="DragStarted"/>...). A move along the axis the nearest
     /// scroll list scrolls on still scrolls it, so a list of draggable cards stays scrollable.
@@ -114,8 +118,15 @@ public partial class GestureDetector : Node
         }
         else if (state == State.SwipeCandidate && heldTime > SwipeMaxTime)
         {
-            // Too slow for a flick: it's a scroll after all
-            StartScrolling();
+            // Too slow for a flick: a drag (when it drags) or a scroll after all
+            if (Drags && !ScrollsAlong(Mathf.Abs(pendingScroll.Y) > Mathf.Abs(pendingScroll.X)))
+            {
+                StartDragging(target?.GetGlobalMousePosition() ?? pressPosition);
+            }
+            else
+            {
+                StartScrolling();
+            }
         }
     }
 
@@ -172,7 +183,7 @@ public partial class GestureDetector : Node
         if (moved.Length() < MoveTolerance) return;
 
         bool vertical = Mathf.Abs(moved.Y) > Mathf.Abs(moved.X);
-        if (Swipes && heldTime <= SwipeMaxTime && (vertical || HorizontalSwipes))
+        if (Swipes && heldTime <= SwipeMaxTime && (vertical ? VerticalSwipes : HorizontalSwipes))
         {
             // Wait for the release (a flick) or for the time to run out (a scroll)
             state = State.SwipeCandidate;
@@ -181,11 +192,7 @@ public partial class GestureDetector : Node
 
         if (Drags && !ScrollsAlong(vertical))
         {
-            state = State.Dragging;
-            // The list mustn't scroll under a dragged item
-            (scroll as DragScrollContainer)?.Release();
-            DragStarted?.Invoke(pressPosition);
-            DragMoved?.Invoke(position);
+            StartDragging(position);
             return;
         }
 
@@ -211,6 +218,15 @@ public partial class GestureDetector : Node
         Reset();
     }
 
+    private void StartDragging(Vector2 position)
+    {
+        state = State.Dragging;
+        // The list mustn't scroll under a dragged item
+        (scroll as DragScrollContainer)?.Release();
+        DragStarted?.Invoke(pressPosition);
+        DragMoved?.Invoke(position);
+    }
+
     private bool IsSwipe(Vector2 moved)
     {
         if (heldTime > SwipeMaxTime) return false;
@@ -218,7 +234,7 @@ public partial class GestureDetector : Node
         var across = Mathf.Min(Mathf.Abs(moved.X), Mathf.Abs(moved.Y));
         bool vertical = Mathf.Abs(moved.Y) >= Mathf.Abs(moved.X);
         // Clearly along one axis, far enough, and an axis that swipes
-        return along >= SwipeDistance && along > across * 1.5f && (vertical || HorizontalSwipes);
+        return along >= SwipeDistance && along > across * 1.5f && (vertical ? VerticalSwipes : HorizontalSwipes);
     }
 
     private static SwipeDirection DirectionOf(Vector2 moved)
